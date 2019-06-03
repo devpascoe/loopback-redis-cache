@@ -7,11 +7,10 @@ module.exports = function(Model, options) {
       client = redis.createClient(clientSettings);
   } else {
       var app = require('../../server/server.js');
-      var clientSettings = app.get('redis');
-      if (app.client) {
-          client = app.client
+      if (app.redisClient) {
+          client = app.redisClient
       } else {
-          client = redis.createClient(clientSettings);
+          client = redis.createClient(app.get('redis'));
       }
   }
 
